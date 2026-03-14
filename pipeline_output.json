@@ -1,0 +1,500 @@
+{
+  "step1_preprocessing": {
+    "query_tokens": [
+      "wrong",
+      "charge",
+      "credit",
+      "card",
+      "charge",
+      "wrong",
+      "amount",
+      "trip",
+      "fare",
+      "show",
+      "different",
+      "what",
+      "deducted",
+      "card"
+    ],
+    "corpus_sample": {
+      "T001": [
+        "app",
+        "crash",
+        "book",
+        "ride",
+        "mobile",
+        "application",
+        "crash",
+        "immediately",
+        "tap",
+        "book"
+      ]
+    }
+  },
+  "step2_tfidf": {
+    "vocabulary_size": 91,
+    "top_idf_terms": [
+      [
+        "happen",
+        2.6094379124341005
+      ],
+      [
+        "tap",
+        2.6094379124341005
+      ],
+      [
+        "android",
+        2.6094379124341005
+      ],
+      [
+        "receive",
+        2.6094379124341005
+      ],
+      [
+        "request",
+        2.6094379124341005
+      ],
+      [
+        "button",
+        2.6094379124341005
+      ],
+      [
+        "cancel",
+        2.6094379124341005
+      ],
+      [
+        "seems",
+        2.6094379124341005
+      ],
+      [
+        "arrive",
+        2.6094379124341005
+      ],
+      [
+        "waited",
+        2.6094379124341005
+      ]
+    ],
+    "query_top_terms": [
+      [
+        "wrong",
+        0.314853257760848
+      ],
+      [
+        "charge",
+        0.314853257760848
+      ],
+      [
+        "card",
+        0.314853257760848
+      ],
+      [
+        "amount",
+        0.18638842231672145
+      ],
+      [
+        "different",
+        0.18638842231672145
+      ],
+      [
+        "what",
+        0.18638842231672145
+      ],
+      [
+        "deducted",
+        0.18638842231672145
+      ],
+      [
+        "credit",
+        0.157426628880424
+      ]
+    ]
+  },
+  "step3_lsi": {
+    "topics": [
+      {
+        "id": 0,
+        "seeds": [
+          "crash",
+          "app",
+          "book",
+          "freeze"
+        ]
+      },
+      {
+        "id": 1,
+        "seeds": [
+          "payment",
+          "charge",
+          "fare",
+          "refund"
+        ]
+      },
+      {
+        "id": 2,
+        "seeds": [
+          "driver",
+          "pickup",
+          "location",
+          "arrive"
+        ]
+      },
+      {
+        "id": 3,
+        "seeds": [
+          "account",
+          "login",
+          "password",
+          "email"
+        ]
+      },
+      {
+        "id": 4,
+        "seeds": [
+          "trip",
+          "cancel",
+          "ride",
+          "request"
+        ]
+      }
+    ],
+    "query_lsi_vector": [
+      0.0,
+      0.2857,
+      0.0,
+      0.0,
+      0.0714
+    ]
+  },
+  "step4_cosine": {
+    "tfidf_similarities": {
+      "T001": 0.0,
+      "T002": 0.0839,
+      "T003": 0.3876,
+      "T004": 0.0,
+      "T005": 0.1827,
+      "T006": 0.0,
+      "T007": 0.0267,
+      "T008": 0.0267
+    },
+    "lsi_similarities": {
+      "T001": 0.14,
+      "T002": 0.0526,
+      "T003": 1.0,
+      "T004": 0.0767,
+      "T005": 1.0,
+      "T006": 0.0757,
+      "T007": 0.1084,
+      "T008": 0.0642
+    }
+  },
+  "step5_ranking": [
+    {
+      "id": "T003",
+      "title": "Payment charged twice for single trip",
+      "category": "payment",
+      "tfidf_score": 0.3876,
+      "lsi_score": 1.0,
+      "trip_score": 0.69,
+      "final_score": 0.693,
+      "tokens": [
+        "payment",
+        "charge",
+        "twice",
+        "single",
+        "trip",
+        "charge",
+        "twice",
+        "ride",
+        "credit",
+        "card",
+        "show",
+        "two",
+        "identical",
+        "charge",
+        "please",
+        "refund",
+        "duplicate",
+        "payment",
+        "immediately"
+      ]
+    },
+    {
+      "id": "T005",
+      "title": "Incorrect fare calculation",
+      "category": "payment",
+      "tfidf_score": 0.1827,
+      "lsi_score": 1.0,
+      "trip_score": 0.92,
+      "final_score": 0.6571,
+      "tokens": [
+        "incorrect",
+        "fare",
+        "calculation",
+        "fare",
+        "higher",
+        "estimate",
+        "show",
+        "before",
+        "trip",
+        "surge",
+        "pricing",
+        "disclose",
+        "properly",
+        "need",
+        "fare",
+        "adjustment"
+      ]
+    },
+    {
+      "id": "T002",
+      "title": "Driver did not arrive at pickup location",
+      "category": "driver_issue",
+      "tfidf_score": 0.0839,
+      "lsi_score": 0.0526,
+      "trip_score": 0.75,
+      "final_score": 0.2046,
+      "tokens": [
+        "driver",
+        "arrive",
+        "pickup",
+        "location",
+        "driver",
+        "accepted",
+        "ride",
+        "went",
+        "wrong",
+        "pickup",
+        "location",
+        "waited",
+        "minutes",
+        "cancel",
+        "gps",
+        "navigation",
+        "seems",
+        "bug"
+      ]
+    },
+    {
+      "id": "T001",
+      "title": "App crashes when booking a ride",
+      "category": "app_crash",
+      "tfidf_score": 0.0,
+      "lsi_score": 0.14,
+      "trip_score": 0.5925,
+      "final_score": 0.1745,
+      "tokens": [
+        "app",
+        "crash",
+        "book",
+        "ride",
+        "mobile",
+        "application",
+        "crash",
+        "immediately",
+        "tap",
+        "book",
+        "ride",
+        "button",
+        "driver",
+        "receive",
+        "request",
+        "happen",
+        "time",
+        "android"
+      ]
+    },
+    {
+      "id": "T007",
+      "title": "Driver was rude and unprofessional",
+      "category": "driver_issue",
+      "tfidf_score": 0.0267,
+      "lsi_score": 0.1084,
+      "trip_score": 0.5175,
+      "final_score": 0.1575,
+      "tokens": [
+        "driver",
+        "rude",
+        "unprofessional",
+        "driver",
+        "extremely",
+        "rude",
+        "throughout",
+        "trip",
+        "phone",
+        "entire",
+        "time",
+        "made",
+        "several",
+        "unsafe",
+        "drive",
+        "maneuvers"
+      ]
+    },
+    {
+      "id": "T004",
+      "title": "App crashes on iPhone",
+      "category": "app_crash",
+      "tfidf_score": 0.0,
+      "lsi_score": 0.0767,
+      "trip_score": 0.575,
+      "final_score": 0.1457,
+      "tokens": [
+        "app",
+        "crash",
+        "iphone",
+        "app",
+        "crash",
+        "try",
+        "book",
+        "ride",
+        "iphone",
+        "freeze",
+        "closes",
+        "cannot",
+        "complete",
+        "book",
+        "through",
+        "mobile",
+        "app"
+      ]
+    },
+    {
+      "id": "T008",
+      "title": "App not loading map",
+      "category": "app_crash",
+      "tfidf_score": 0.0267,
+      "lsi_score": 0.0642,
+      "trip_score": 0.485,
+      "final_score": 0.1334,
+      "tokens": [
+        "app",
+        "load",
+        "map",
+        "map",
+        "inside",
+        "application",
+        "load",
+        "properly",
+        "show",
+        "blank",
+        "screen",
+        "cannot",
+        "see",
+        "driver",
+        "location",
+        "book",
+        "ride"
+      ]
+    },
+    {
+      "id": "T006",
+      "title": "Cannot login to account",
+      "category": "account",
+      "tfidf_score": 0.0,
+      "lsi_score": 0.0757,
+      "trip_score": 0.5075,
+      "final_score": 0.1318,
+      "tokens": [
+        "cannot",
+        "login",
+        "account",
+        "cannot",
+        "log",
+        "account",
+        "password",
+        "reset",
+        "email",
+        "arrives",
+        "locked",
+        "out",
+        "days",
+        "cannot",
+        "book",
+        "ride"
+      ]
+    }
+  ],
+  "evaluation": {
+    "relevant_category": "payment",
+    "relevant_tickets": [
+      "T005",
+      "T003"
+    ],
+    "precision_at_1": 1.0,
+    "precision_at_3": 0.6667,
+    "precision_at_5": 0.4,
+    "ndcg_at_3": 1.0,
+    "ndcg_at_5": 1.0,
+    "mrr": 1.0,
+    "map": 1.0,
+    "ranked_ids": [
+      "T003",
+      "T005",
+      "T002",
+      "T001",
+      "T007",
+      "T004",
+      "T008",
+      "T006"
+    ],
+    "score_breakdown": [
+      {
+        "id": "T003",
+        "final": 0.693,
+        "tfidf": 0.3876,
+        "lsi": 1.0,
+        "trip": 0.69
+      },
+      {
+        "id": "T005",
+        "final": 0.6571,
+        "tfidf": 0.1827,
+        "lsi": 1.0,
+        "trip": 0.92
+      },
+      {
+        "id": "T002",
+        "final": 0.2046,
+        "tfidf": 0.0839,
+        "lsi": 0.0526,
+        "trip": 0.75
+      },
+      {
+        "id": "T001",
+        "final": 0.1745,
+        "tfidf": 0.0,
+        "lsi": 0.14,
+        "trip": 0.5925
+      },
+      {
+        "id": "T007",
+        "final": 0.1575,
+        "tfidf": 0.0267,
+        "lsi": 0.1084,
+        "trip": 0.5175
+      },
+      {
+        "id": "T004",
+        "final": 0.1457,
+        "tfidf": 0.0,
+        "lsi": 0.0767,
+        "trip": 0.575
+      },
+      {
+        "id": "T008",
+        "final": 0.1334,
+        "tfidf": 0.0267,
+        "lsi": 0.0642,
+        "trip": 0.485
+      },
+      {
+        "id": "T006",
+        "final": 0.1318,
+        "tfidf": 0.0,
+        "lsi": 0.0757,
+        "trip": 0.5075
+      }
+    ]
+  }
+}
