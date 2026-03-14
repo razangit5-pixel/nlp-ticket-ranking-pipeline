@@ -12,7 +12,7 @@
 ---
 ## Pipeline Diagram
 
-![Pipeline](pipeline_diagram.png)
+![Pipeline](https://github.com/razangit5-pixel/nlp-ticket-ranking-pipeline/blob/master/Screenshot%202026-03-14%20172141.png?raw=true)
 
 ## Pipeline Architecture
 
